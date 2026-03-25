@@ -1,9 +1,9 @@
 from os.path import join
 import sys
 import time
-from line_profiler import profile
-
+import concurrent.futures
 import numpy as np
+import os
 
 
 def load_data(load_dir, bid):
@@ -14,7 +14,6 @@ def load_data(load_dir, bid):
     return u, interior_mask
 
 
-@profile
 def jacobi(u, interior_mask, max_iter, atol=1e-6):
     u = np.copy(u)
 
@@ -28,6 +27,20 @@ def jacobi(u, interior_mask, max_iter, atol=1e-6):
         if delta < atol:
             break
     return u
+
+
+def simulate_chunk(chunk_tasks):
+    """
+    Simulates a chunk of multiple building tasks in a single worker process.
+    chunk_tasks is a list of tuples: (i, u0, mask, max_iter, atol)
+    Returns a list of tuples: (i, u_result)
+    """
+    results = []
+    for args in chunk_tasks:
+        i, u0, mask, max_iter, atol = args
+        u_result = jacobi(u0, mask, max_iter, atol)
+        results.append((i, u_result))
+    return results
 
 
 def summary_stats(u, interior_mask):
@@ -45,16 +58,21 @@ def summary_stats(u, interior_mask):
 
 
 if __name__ == '__main__':
+    # Start the timer!
     start_time = time.time()
+
     # Load data
     LOAD_DIR = 'modified_swiss_dwellings/'
     with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
         building_ids = f.read().splitlines()
 
-    if len(sys.argv) < 2:
-        N = 10
-    else:
+    N = 10
+    WORKERS = 4
+    if len(sys.argv) > 1:
         N = int(sys.argv[1])
+    if len(sys.argv) > 2:
+        WORKERS = int(sys.argv[2])
+        
     building_ids = building_ids[:N]
 
     # Load floor plans
@@ -68,17 +86,28 @@ if __name__ == '__main__':
     # Run jacobi iterations for each floor plan
     MAX_ITER = 20_000
     ABS_TOL = 1e-4
-
     all_u = np.empty_like(all_u0)
-    for i, (u0, interior_mask) in enumerate(zip(all_u0, all_interior_mask)):
-        u = jacobi(u0, interior_mask, MAX_ITER, ABS_TOL)
-        all_u[i] = u
+
+    # Package tasks and group them statically for workers
+    tasks = [
+        (i, all_u0[i], all_interior_mask[i], MAX_ITER, ABS_TOL) 
+        for i in range(N)
+    ]
+    
+    # Static allocation: split the task list into WORKERS number of equal chunks (or roughly equal)
+    chunk_size = int(np.ceil(N / WORKERS))
+    task_chunks = [tasks[x:x+chunk_size] for x in range(0, N, chunk_size)]
+
+    # Execute calculations in parallel across multiple CPU cores
+    with concurrent.futures.ProcessPoolExecutor(max_workers=WORKERS) as executor:
+        for chunk_results in executor.map(simulate_chunk, task_chunks):
+            for i, u_result in chunk_results:
+                all_u[i] = u_result
 
     # Print summary statistics in CSV format
     stat_keys = ['mean_temp', 'std_temp', 'pct_above_18', 'pct_below_15']
-    print('building_id, ' + ', '.join(stat_keys))  # CSV header
     for bid, u, interior_mask in zip(building_ids, all_u, all_interior_mask):
         stats = summary_stats(u, interior_mask)
-        print(f"{bid},", ", ".join(str(stats[k]) for k in stat_keys))
-
-    print(f"\n--- Process finished in {time.time() - start_time:.2f} seconds ---")
+        
+    # Print the final execution time
+    print(f"--- Process finished in {time.time() - start_time:.2f} seconds ---")

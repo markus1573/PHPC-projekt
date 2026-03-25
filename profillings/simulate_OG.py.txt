@@ -1,0 +1,32 @@
+building_id, mean_temp, std_temp, pct_above_18, pct_below_15
+10000, 14.01233878811275, 6.367431059312565, 30.941014791508444, 55.542295034537624
+10009, 11.000135812436373, 5.811144379826625, 16.6712734948236, 74.9723590310584
+10014, 14.744169941950119, 7.037733284673848, 38.26367541377415, 52.80837116508215
+10019, 14.735524480624482, 7.030325006703675, 38.14915412864569, 52.92926826787113
+10029, 10.616037322820358, 6.317331938274926, 18.25563221896085, 74.51301795448481
+
+--- Process finished in 20.63 seconds ---
+Wrote profile results to 'simulate_OG.py.lprof'
+Timer unit: 1e-06 s
+
+Total time: 20.5975 s
+File: simulate_OG.py
+Function: jacobi at line 17
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    17                                           @profile
+    18                                           def jacobi(u, interior_mask, max_iter, atol=1e-6):
+    19         5        519.0    103.8      0.0      u = np.copy(u)
+    20                                           
+    21     28423       2254.0      0.1      0.0      for i in range(max_iter):
+    22                                                   # Compute average of left, right, up and down neighbors, see eq. (1)
+    23     28423   12522189.0    440.6     60.8          u_new = 0.25 * (u[1:-1, :-2] + u[1:-1, 2:] + u[:-2, 1:-1] + u[2:, 1:-1])
+    24     28423    2347599.0     82.6     11.4          u_new_interior = u_new[interior_mask]
+    25     28423    3588250.0    126.2     17.4          delta = np.abs(u[1:-1, 1:-1][interior_mask] - u_new_interior).max()
+    26     28423    2133349.0     75.1     10.4          u[1:-1, 1:-1][interior_mask] = u_new_interior
+    27                                           
+    28     28423       3331.0      0.1      0.0          if delta < atol:
+    29         5          5.0      1.0      0.0              break
+    30         5          0.0      0.0      0.0      return u
+
