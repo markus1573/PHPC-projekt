@@ -26,3 +26,8 @@ for w in 2 4 8 $MAX_CORES; do
     echo -n "Workers: $w -> "
     python simulate_dynamic.py $N $w | grep "Process finished"
 done
+
+echo ""
+echo "JIT Simulation"
+echo "------------------------------------------------"
+python simulate_JIT.py $N | grep "Process finished"
