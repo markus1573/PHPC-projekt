@@ -84,7 +84,7 @@ if __name__ == '__main__':
         all_interior_mask[i] = interior_mask
 
     # Run jacobi iterations for each floor plan
-    MAX_ITER = 20_000
+    MAX_ITER = 10_000
 
     all_u = np.empty_like(all_u0)
     for i, (u0, interior_mask) in enumerate(zip(all_u0, all_interior_mask)):
