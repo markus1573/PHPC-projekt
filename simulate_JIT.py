@@ -1,7 +1,6 @@
 from os.path import join
 import sys
 import time
-from line_profiler import profile
 from numba import jit
 
 import numpy as np

@@ -1,6 +1,7 @@
 from os.path import join
 import sys
 import time
+from line_profiler import profile
 
 import numpy as np
 
@@ -13,6 +14,7 @@ def load_data(load_dir, bid):
     return u, interior_mask
 
 
+@profile
 def jacobi(u, interior_mask, max_iter, atol=1e-6):
     u = np.copy(u)
 

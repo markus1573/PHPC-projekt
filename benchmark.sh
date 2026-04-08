@@ -1,6 +1,9 @@
 #!/bin/bash
 # A small script to easily benchmark static vs dynamic scaling
 
+source /dtu/projects/02613_2025/conda/conda_init.sh
+conda activate 02613_2026
+
 N=20
 LOAD_DIR="subset_swiss_dwellings/"
 MAX_CORES=$(python -c "import os; print(os.cpu_count() or 4)")

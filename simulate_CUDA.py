@@ -2,7 +2,6 @@ from os.path import join
 import sys
 import time
 import math
-from line_profiler import profile
 from numba import cuda
 
 import numpy as np
