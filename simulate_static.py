@@ -62,16 +62,19 @@ if __name__ == '__main__':
     start_time = time.time()
 
     # Load data
-    LOAD_DIR = 'modified_swiss_dwellings/'
-    with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
-        building_ids = f.read().splitlines()
-
     N = 10
     WORKERS = 4
+    LOAD_DIR = 'modified_swiss_dwellings/'
+    
     if len(sys.argv) > 1:
         N = int(sys.argv[1])
     if len(sys.argv) > 2:
         WORKERS = int(sys.argv[2])
+    if len(sys.argv) > 3:
+        LOAD_DIR = sys.argv[3]
+
+    with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
+        building_ids = f.read().splitlines()
         
     building_ids = building_ids[:N]
 

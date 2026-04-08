@@ -65,14 +65,18 @@ def summary_stats(u, interior_mask):
 if __name__ == '__main__':
     start_time = time.time()
     # Load data
-    LOAD_DIR = 'modified_swiss_dwellings/'
-    with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
-        building_ids = f.read().splitlines()
-
     if len(sys.argv) < 2:
         N = 10
     else:
         N = int(sys.argv[1])
+
+    if len(sys.argv) < 3:
+        LOAD_DIR = 'modified_swiss_dwellings/'
+    else:
+        LOAD_DIR = sys.argv[2]
+
+    with open(join(LOAD_DIR, 'building_ids.txt'), 'r') as f:
+        building_ids = f.read().splitlines()
     building_ids = building_ids[:N]
 
     # Load floor plans
