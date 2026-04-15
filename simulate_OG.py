@@ -4,6 +4,14 @@ import time
 
 import numpy as np
 
+# profiling agnostic decorator
+try:
+    # This will succeed if kernprof runs the script
+    profile
+except NameError:
+    # If run normally, define a dummy decorator that just passes through the function
+    def profile(func):
+        return func
 
 def load_data(load_dir, bid):
     SIZE = 512
@@ -12,7 +20,7 @@ def load_data(load_dir, bid):
     interior_mask = np.load(join(load_dir, f"{bid}_interior.npy"))
     return u, interior_mask
 
-
+@profile
 def jacobi(u, interior_mask, max_iter, atol=1e-6):
     u = np.copy(u)
 
