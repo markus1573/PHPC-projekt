@@ -14,10 +14,8 @@
 #BSUB -R "select[model==XeonGold6126]"
 ### -- Select the resources: 1 gpu in exclusive process mode --
 #BSUB -gpu "num=1:mode=exclusive_process"
-### -- specify that we want the job to get killed if it exceeds 5 GB per core/slot -- 
-#BSUB -M 5GB
 ### -- set walltime limit: hh:mm -- 
-#BSUB -W 00:10 
+#BSUB -W 00:30 
 ### -- set the email address -- 
 # please uncomment the following line and put in your e-mail address,
 # if you want to receive e-mail notifications on a non-default address
