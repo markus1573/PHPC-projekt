@@ -40,3 +40,8 @@ echo ""
 echo "CUDA Simulation"
 echo "------------------------------------------------"
 python simulate_CUDA.py $N $LOAD_DIR | grep "Process finished"
+
+echo ""
+echo "cupy Simulation"
+echo "------------------------------------------------"
+python simulate_cupy.py $N $LOAD_DIR | grep "Process finished"
