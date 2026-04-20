@@ -11,7 +11,7 @@
 ### -- specify that we need 4GB of memory per core/slot -- 
 #BSUB -R "rusage[mem=1GB]"
 ### -- specify the model of CPU we want to run on --
-#BSUB -R "select[model==XeonGold6126]"
+## BSUB -R "select[model==XeonGold6126]"
 ### -- Select the resources: 1 gpu in exclusive process mode --
 #BSUB -gpu "num=1:mode=exclusive_process"
 ### -- set walltime limit: hh:mm -- 

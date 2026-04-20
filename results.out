@@ -1,0 +1,32 @@
+Benchmarking with N=20 floorplans from subset_swiss_dwellings/
+================================================
+
+baseline
+------------------------------------------------
+--- Process finished in 180.05 seconds ---
+
+Static Scheduling
+------------------------------------------------
+Workers: 2 -> --- Process finished in 110.07 seconds ---
+Workers: 4 -> --- Process finished in 63.82 seconds ---
+Workers: 8 -> --- Process finished in 44.32 seconds ---
+Workers: 32 -> --- Process finished in 28.50 seconds ---
+
+Dynamic Scheduling
+------------------------------------------------
+Workers: 2 -> --- Process finished in 94.92 seconds ---
+Workers: 4 -> --- Process finished in 54.87 seconds ---
+Workers: 8 -> --- Process finished in 40.11 seconds ---
+Workers: 32 -> --- Process finished in 29.38 seconds ---
+
+JIT Simulation
+------------------------------------------------
+--- Process finished in 63.61 seconds ---
+
+CUDA Simulation
+------------------------------------------------
+--- Process finished in 15.15 seconds ---
+
+cupy Simulation
+------------------------------------------------
+--- Process finished in 59.60 seconds ---
