@@ -82,7 +82,7 @@ if __name__ == '__main__':
         all_interior_mask[i] = interior_mask
 
     # Run jacobi iterations for each floor plan
-    MAX_ITER = 20_000
+    MAX_ITER = 10_000
     ABS_TOL = 1e-4
 
     all_u = np.empty_like(all_u0)
