@@ -4,7 +4,7 @@ import time
 from numba import jit
 
 import numpy as np
-
+#task 7
 
 def load_data(load_dir, bid):
     SIZE = 512

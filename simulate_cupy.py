@@ -3,7 +3,7 @@ import sys
 import time
 
 import cupy as cp
-
+# task 9
 
 def load_data(load_dir, bid):
     SIZE = 512

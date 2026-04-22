@@ -91,5 +91,5 @@ if __name__ == '__main__':
     else:
         with open(join(LOAD_DIR, 'building_ids.txt')) as f:
             building_id = f.readline().strip()
-
+    
     visualize(building_id)

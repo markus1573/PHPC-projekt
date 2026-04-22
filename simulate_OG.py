@@ -5,6 +5,7 @@ import time
 import numpy as np
 
 # profiling agnostic decorator
+# task 
 try:
     # This will succeed if kernprof runs the script
     profile
