@@ -5,13 +5,13 @@
 ### -- set the job Name -- 
 #BSUB -J PHPC_benchmark
 ### -- ask for number of cores (default: 1) -- 
-#BSUB -n 16
+#BSUB -n 32
 ### -- specify that the cores must be on the same host -- 
 #BSUB -R "span[hosts=1]"
 ### -- specify that we need 4GB of memory per core/slot -- 
 #BSUB -R "rusage[mem=1GB]"
 ### -- specify the model of CPU we want to run on --
-## BSUB -R "select[model==XeonGold6126]"
+#BSUB -R "select[model==XeonGold6226R]"
 ### -- Select the resources: 1 gpu in exclusive process mode --
 #BSUB -gpu "num=1:mode=exclusive_process"
 ### -- set walltime limit: hh:mm -- 
@@ -48,7 +48,7 @@ python simulate_OG.py $N $LOAD_DIR | grep "Process finished"
 echo ""
 echo "Static Scheduling"
 echo "------------------------------------------------"
-for w in 2 4 8 $MAX_CORES; do
+for w in {2..32..2}; do
     echo -n "Workers: $w -> "
     python simulate_static.py $N $w $LOAD_DIR | grep "Process finished"
 done
@@ -56,7 +56,7 @@ done
 echo ""
 echo "Dynamic Scheduling"
 echo "------------------------------------------------"
-for w in 2 4 8 $MAX_CORES; do
+for w in {2..32..2}; do
     echo -n "Workers: $w -> "
     python simulate_dynamic.py $N $w $LOAD_DIR | grep "Process finished"
 done
