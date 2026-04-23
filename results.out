@@ -3,30 +3,56 @@ Benchmarking with N=20 floorplans from subset_swiss_dwellings/
 
 baseline
 ------------------------------------------------
---- Process finished in 180.05 seconds ---
+--- Process finished in 168.55 seconds ---
 
 Static Scheduling
 ------------------------------------------------
-Workers: 2 -> --- Process finished in 110.07 seconds ---
-Workers: 4 -> --- Process finished in 63.82 seconds ---
-Workers: 8 -> --- Process finished in 44.32 seconds ---
-Workers: 32 -> --- Process finished in 28.50 seconds ---
+Workers: 2 -> --- Process finished in 97.34 seconds ---
+Workers: 3 -> --- Process finished in 69.77 seconds ---
+Workers: 4 -> --- Process finished in 53.16 seconds ---
+Workers: 5 -> --- Process finished in 40.86 seconds ---
+Workers: 6 -> --- Process finished in 40.53 seconds ---
+Workers: 7 -> --- Process finished in 36.34 seconds ---
+Workers: 8 -> --- Process finished in 35.02 seconds ---
+Workers: 9 -> --- Process finished in 35.16 seconds ---
+Workers: 10 -> --- Process finished in 28.68 seconds ---
+Workers: 11 -> --- Process finished in 29.89 seconds ---
+Workers: 12 -> --- Process finished in 29.66 seconds ---
+Workers: 13 -> --- Process finished in 30.99 seconds ---
+Workers: 14 -> --- Process finished in 29.94 seconds ---
+Workers: 15 -> --- Process finished in 28.26 seconds ---
+Workers: 16 -> --- Process finished in 30.51 seconds ---
 
 Dynamic Scheduling
 ------------------------------------------------
-Workers: 2 -> --- Process finished in 94.92 seconds ---
-Workers: 4 -> --- Process finished in 54.87 seconds ---
-Workers: 8 -> --- Process finished in 40.11 seconds ---
-Workers: 32 -> --- Process finished in 29.38 seconds ---
+Workers: 2 -> --- Process finished in 87.08 seconds ---
+Workers: 3 -> --- Process finished in 62.59 seconds ---
+Workers: 4 -> --- Process finished in 53.78 seconds ---
+Workers: 5 -> --- Process finished in 40.53 seconds ---
+Workers: 6 -> --- Process finished in 38.25 seconds ---
+Workers: 7 -> --- Process finished in 33.06 seconds ---
+Workers: 8 -> --- Process finished in 31.99 seconds ---
+Workers: 9 -> --- Process finished in 29.46 seconds ---
+Workers: 10 -> --- Process finished in 28.16 seconds ---
+Workers: 11 -> --- Process finished in 27.46 seconds ---
+Workers: 12 -> --- Process finished in 26.66 seconds ---
+Workers: 13 -> --- Process finished in 25.46 seconds ---
+Workers: 14 -> --- Process finished in 24.46 seconds ---
+Workers: 15 -> --- Process finished in 23.68 seconds ---
+Workers: 16 -> --- Process finished in 24.08 seconds ---
 
 JIT Simulation
 ------------------------------------------------
---- Process finished in 63.61 seconds ---
+--- Process finished in 53.23 seconds ---
 
 CUDA Simulation
 ------------------------------------------------
---- Process finished in 15.15 seconds ---
+--- Process finished in 13.20 seconds ---
 
 cupy Simulation
 ------------------------------------------------
---- Process finished in 59.60 seconds ---
+--- Process finished in 50.08 seconds ---
+
+cupy Simulation fixed
+------------------------------------------------
+--- Process finished in 24.80 seconds ---
