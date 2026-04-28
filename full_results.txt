@@ -1,0 +1,5 @@
+a) Histogram saved as 'mean_temp_histogram.png'
+b) Average mean temperature: 14.67 °C
+c) Average temperature standard deviation: 6.81 °C
+d) Buildings with at least 50% area above 18ºC: 794
+e) Buildings with at least 50% area below 15ºC: 2483
